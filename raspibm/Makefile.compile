@@ -1,0 +1,26 @@
+
+ifeq ($(BUILD_SUB_DIR),)
+BUILD_SUB_DIR = $(SUB_DIR)
+endif
+
+$(BUILD_DIR)/$(BUILD_SUB_DIR)/%_c.o: $(SRC_ROOT)/$(SUB_DIR)/%.c
+	mkdir -p $(@D)
+	$(CC) $(CC_FLAGS) $($(subst /,_,$(@D))_CC_FLAGS) -MMD -c -o $@ $<
+	$($(subst /,_,$(@D))_POST_COMPILE)
+
+$(BUILD_DIR)/$(BUILD_SUB_DIR)/%_s.o: $(SRC_ROOT)/$(SUB_DIR)/%.S
+	mkdir -p $(@D)
+	$(AS) $(AS_FLAGS) $($(subst /,_,$(@D))_AS_FLAGS) -MMD -c -o $@ $<
+	$($(subst /,_,$(@D))_POST_COMPILE)
+
+OBJ_FILES_SUB = $(AS_FILES:%.S=$(BUILD_DIR)/$(BUILD_SUB_DIR)/%_s.o)
+OBJ_FILES_SUB += $(CC_FILES:%.c=$(BUILD_DIR)/$(BUILD_SUB_DIR)/%_c.o)
+
+DEP_FILES = $(OBJ_FILES_SUB:%.o=%.d)
+-include $(DEP_FILES)
+
+OBJ_FILES := $(OBJ_FILES) $(OBJ_FILES_SUB)
+
+CC_FILES =
+AS_FILES =
+BUILD_SUB_DIR =
