@@ -1,5 +1,6 @@
 OUTPUT_ARCH(aarch64)
 ENTRY(_text)
+jiffies = jiffies_64;
 PECOFF_FILE_ALIGNMENT = 0x200;
 SECTIONS
 {
@@ -66,7 +67,7 @@ SECTIONS
  __inittext_end = .;
  __initdata_begin = .;
  .init.data : {
-  KEEP(*(SORT(___kentry+*))) *(.init.data init.data.*) *(.meminit.data*) . = ALIGN(8); __start_mcount_loc = .; KEEP(*(__mcount_loc)) KEEP(*(__patchable_function_entries)) __stop_mcount_loc = .; *(.init.rodata .init.rodata.*) . = ALIGN(8); __start_ftrace_events = .; KEEP(*(_ftrace_events)) __stop_ftrace_events = .; __start_ftrace_eval_maps = .; KEEP(*(_ftrace_eval_map)) __stop_ftrace_eval_maps = .; . = ALIGN(8); __start_kprobe_blacklist = .; KEEP(*(_kprobe_blacklist)) __stop_kprobe_blacklist = .; . = ALIGN(32); __start_error_injection_whitelist = .; KEEP(*(_error_injection_whitelist)) __stop_error_injection_whitelist = .; *(.meminit.rodata) . = ALIGN(8); __clk_of_table = .; KEEP(*(__clk_of_table)) KEEP(*(__clk_of_table_end)) . = ALIGN(8); __reservedmem_of_table = .; KEEP(*(__reservedmem_of_table)) KEEP(*(__reservedmem_of_table_end)) . = ALIGN(8); __timer_of_table = .; KEEP(*(__timer_of_table)) KEEP(*(__timer_of_table_end)) . = ALIGN(8); __cpu_method_of_table = .; KEEP(*(__cpu_method_of_table)) KEEP(*(__cpu_method_of_table_end)) . = ALIGN(8); __cpuidle_method_of_table = .; KEEP(*(__cpuidle_method_of_table)) KEEP(*(__cpuidle_method_of_table_end)) . = ALIGN(32); __dtb_start = .; KEEP(*(.dtb.init.rodata)) __dtb_end = .; . = ALIGN(8); __irqchip_of_table = .; KEEP(*(__irqchip_of_table)) KEEP(*(__irqchip_of_table_end)) . = ALIGN(8); __governor_thermal_table = .; KEEP(*(__governor_thermal_table)) __governor_thermal_table_end = .; . = ALIGN(8); __earlycon_table = .; KEEP(*(__earlycon_table)) __earlycon_table_end = .; . = ALIGN(8); __start_lsm_info = .; KEEP(*(.lsm_info.init)) __end_lsm_info = .; . = ALIGN(8); __start_early_lsm_info = .; KEEP(*(.early_lsm_info.init)) __end_early_lsm_info = .; . = ALIGN(8); __kunit_suites_start = .; KEEP(*(.kunit_test_suites)) __kunit_suites_end = .;
+  KEEP(*(SORT(___kentry+*))) *(.init.data init.data.*) *(.meminit.data*) . = ALIGN(8); __start_mcount_loc = .; KEEP(*(__mcount_loc)) KEEP(*(__patchable_function_entries)) __stop_mcount_loc = .; ftrace_stub_graph = ftrace_stub; *(.init.rodata .init.rodata.*) . = ALIGN(8); __start_ftrace_events = .; KEEP(*(_ftrace_events)) __stop_ftrace_events = .; __start_ftrace_eval_maps = .; KEEP(*(_ftrace_eval_map)) __stop_ftrace_eval_maps = .; . = ALIGN(8); __start_kprobe_blacklist = .; KEEP(*(_kprobe_blacklist)) __stop_kprobe_blacklist = .; . = ALIGN(32); __start_error_injection_whitelist = .; KEEP(*(_error_injection_whitelist)) __stop_error_injection_whitelist = .; *(.meminit.rodata) . = ALIGN(8); __clk_of_table = .; KEEP(*(__clk_of_table)) KEEP(*(__clk_of_table_end)) . = ALIGN(8); __reservedmem_of_table = .; KEEP(*(__reservedmem_of_table)) KEEP(*(__reservedmem_of_table_end)) . = ALIGN(8); __timer_of_table = .; KEEP(*(__timer_of_table)) KEEP(*(__timer_of_table_end)) . = ALIGN(8); __cpu_method_of_table = .; KEEP(*(__cpu_method_of_table)) KEEP(*(__cpu_method_of_table_end)) . = ALIGN(8); __cpuidle_method_of_table = .; KEEP(*(__cpuidle_method_of_table)) KEEP(*(__cpuidle_method_of_table_end)) . = ALIGN(32); __dtb_start = .; KEEP(*(.dtb.init.rodata)) __dtb_end = .; . = ALIGN(8); __irqchip_of_table = .; KEEP(*(__irqchip_of_table)) KEEP(*(__irqchip_of_table_end)) . = ALIGN(8); __governor_thermal_table = .; KEEP(*(__governor_thermal_table)) __governor_thermal_table_end = .; . = ALIGN(8); __earlycon_table = .; KEEP(*(__earlycon_table)) __earlycon_table_end = .; . = ALIGN(8); __start_lsm_info = .; KEEP(*(.lsm_info.init)) __end_lsm_info = .; . = ALIGN(8); __start_early_lsm_info = .; KEEP(*(.early_lsm_info.init)) __end_early_lsm_info = .; . = ALIGN(8); __kunit_suites_start = .; KEEP(*(.kunit_test_suites)) __kunit_suites_end = .;
   . = ALIGN(16); __setup_start = .; KEEP(*(.init.setup)) __setup_end = .;
   __initcall_start = .; KEEP(*(.initcallearly.init)) __initcall0_start = .; KEEP(*(.initcall0.init)) KEEP(*(.initcall0s.init)) __initcall1_start = .; KEEP(*(.initcall1.init)) KEEP(*(.initcall1s.init)) __initcall2_start = .; KEEP(*(.initcall2.init)) KEEP(*(.initcall2s.init)) __initcall3_start = .; KEEP(*(.initcall3.init)) KEEP(*(.initcall3s.init)) __initcall4_start = .; KEEP(*(.initcall4.init)) KEEP(*(.initcall4s.init)) __initcall5_start = .; KEEP(*(.initcall5.init)) KEEP(*(.initcall5s.init)) __initcallrootfs_start = .; KEEP(*(.initcallrootfs.init)) KEEP(*(.initcallrootfss.init)) __initcall6_start = .; KEEP(*(.initcall6.init)) KEEP(*(.initcall6s.init)) __initcall7_start = .; KEEP(*(.initcall7.init)) KEEP(*(.initcall7s.init)) __initcall_end = .;
   __con_initcall_start = .; KEEP(*(.con_initcall.init)) __con_initcall_end = .;
@@ -105,8 +106,6 @@ SECTIONS
  . = ALIGN((1 << 12));
  init_pg_dir = .;
  . += ((1 << 12) * ( 1 + ((((((_end)) - 1) >> (((12 - 3) * (4 - (4 - 3)) + 3))) - ((((((((((-(((1)) << ((((39))) - 1))))) + (0x08000000))) + (0x08000000))))) >> (((12 - 3) * (4 - (4 - 3)) + 3))) + 1 + (0))) + (0) + (0)));
- /* IO mapping pages */
- . += ((1 << 12) * 2);
  init_pg_end = .;
  . = ALIGN(0x00010000);
  __pecoff_data_size = ABSOLUTE(. - __initdata_begin);
@@ -122,10 +121,43 @@ SECTIONS
  .data.rel.ro : { *(.data.rel.ro) }
  ASSERT(SIZEOF(.data.rel.ro) == 0, "Unexpected RELRO detected!")
 }
+__efistub_kernel_size = _edata - _text;
+__efistub_primary_entry_offset = primary_entry - _text;
+__efistub_memcmp = __pi_memcmp;
+__efistub_memchr = __pi_memchr;
+__efistub_memcpy = __pi_memcpy;
+__efistub_memmove = __pi_memmove;
+__efistub_memset = __pi_memset;
+__efistub_strlen = __pi_strlen;
+__efistub_strnlen = __pi_strnlen;
+__efistub_strcmp = __pi_strcmp;
+__efistub_strncmp = __pi_strncmp;
+__efistub_strrchr = __pi_strrchr;
+__efistub___clean_dcache_area_poc = __pi___clean_dcache_area_poc;
+__efistub__text = _text;
+__efistub__end = _end;
+__efistub__edata = _edata;
+__efistub_screen_info = screen_info;
+__efistub__ctype = _ctype;
+__kvm_nvhe_kvm_patch_vector_branch = kvm_patch_vector_branch;;
+__kvm_nvhe_kvm_update_va_mask = kvm_update_va_mask;;
+__kvm_nvhe_kvm_vgic_global_state = kvm_vgic_global_state;;
+__kvm_nvhe_kimage_voffset = kimage_voffset;;
+__kvm_nvhe___hyp_panic_string = __hyp_panic_string;;
+__kvm_nvhe_panic = panic;;
+__kvm_nvhe___hyp_stub_vectors = __hyp_stub_vectors;;
+__kvm_nvhe_idmap_t0sz = idmap_t0sz;;
+__kvm_nvhe___icache_flags = __icache_flags;;
+__kvm_nvhe_arm64_const_caps_ready = arm64_const_caps_ready;;
+__kvm_nvhe_cpu_hwcap_keys = cpu_hwcap_keys;;
+__kvm_nvhe_vgic_v2_cpuif_trap = vgic_v2_cpuif_trap;;
+__kvm_nvhe_vgic_v3_cpuif_trap = vgic_v3_cpuif_trap;;
+__kvm_nvhe___start___kvm_ex_table = __start___kvm_ex_table;;
+__kvm_nvhe___stop___kvm_ex_table = __stop___kvm_ex_table;;
 ASSERT(__hyp_idmap_text_end - (__hyp_idmap_text_start & ~(0x00001000 - 1)) <= 0x00001000,
  "HYP init code too big or misaligned")
 ASSERT(__idmap_text_end - (__idmap_text_start & ~(0x00001000 - 1)) <= 0x00001000,
  "ID map text too big or misaligned")
-/* #RM ASSERT((__entry_tramp_text_end - __entry_tramp_text_start) == (1 << 12),
- "Entry trampoline text too big") */
+ASSERT((__entry_tramp_text_end - __entry_tramp_text_start) == (1 << 12),
+ "Entry trampoline text too big")
 ASSERT(_text == (((((((-(((1)) << ((((39))) - 1))))) + (0x08000000))) + (0x08000000))), "HEAD is misaligned")

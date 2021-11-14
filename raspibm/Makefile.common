@@ -10,6 +10,7 @@ SYS_INCLUDES = -isystem /usr/lib/gcc-cross/aarch64-linux-gnu/9/include
 INCLUDES = -I $(SRC_ROOT)/arch/arm64/include \
            -I $(SRC_ROOT)/raspibm/arch/arm64/include/generated \
            -I $(SRC_ROOT)/include \
+           -I ./include \
            -I $(SRC_ROOT)/raspibm/include \
            -I $(SRC_ROOT)/arch/arm64/include/uapi \
            -I $(SRC_ROOT)/raspibm/arch/arm64/include/generated/uapi \
